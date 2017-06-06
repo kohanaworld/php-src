@@ -1,5 +1,5 @@
 dnl $Id$
-dnl config.m4 for extension libsodium
+dnl config.m4 for extension sodium
 
 PHP_ARG_WITH(libsodium, for libsodium support,
 [  --with-libsodium[[=DIR]]  Include libsodium support])
@@ -47,5 +47,5 @@ if test "$PHP_LIBSODIUM" != "no"; then
 
   PHP_SUBST(LIBSODIUM_SHARED_LIBADD)
 
-  PHP_NEW_EXTENSION(libsodium, libsodium.c, $ext_shared)
+  PHP_NEW_EXTENSION(sodium, libsodium.c, $ext_shared)
 fi
