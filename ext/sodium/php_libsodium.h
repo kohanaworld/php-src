@@ -2,28 +2,20 @@
 #ifndef PHP_LIBSODIUM_H
 #define PHP_LIBSODIUM_H
 
-extern zend_module_entry libsodium_module_entry;
-#define phpext_libsodium_ptr &libsodium_module_entry
+extern zend_module_entry sodium_module_entry;
+#define phpext_sodium_ptr &sodium_module_entry
 
-#define PHP_LIBSODIUM_VERSION "2.0.0"
-
-#ifdef PHP_WIN32
-# define PHP_LIBSODIUM_API __declspec(dllexport)
-#elif defined(__GNUC__) && __GNUC__ >= 4
-# define PHP_LIBSODIUM_API __attribute__ ((visibility("default")))
-#else
-# define PHP_LIBSODIUM_API
-#endif
+#define PHP_SODIUM_VERSION PHP_VERSION
 
 #ifdef ZTS
 # include "TSRM.h"
 #endif
 
-PHP_MINIT_FUNCTION(libsodium);
-PHP_MSHUTDOWN_FUNCTION(libsodium);
-PHP_RINIT_FUNCTION(libsodium);
-PHP_RSHUTDOWN_FUNCTION(libsodium);
-PHP_MINFO_FUNCTION(libsodium);
+PHP_MINIT_FUNCTION(sodium);
+PHP_MSHUTDOWN_FUNCTION(sodium);
+PHP_RINIT_FUNCTION(sodium);
+PHP_RSHUTDOWN_FUNCTION(sodium);
+PHP_MINFO_FUNCTION(sodium);
 
 PHP_FUNCTION(sodium_crypto_aead_aes256gcm_is_available);
 PHP_FUNCTION(sodium_crypto_aead_aes256gcm_decrypt);
@@ -86,12 +78,6 @@ PHP_FUNCTION(sodium_increment);
 PHP_FUNCTION(sodium_add);
 PHP_FUNCTION(sodium_memcmp);
 PHP_FUNCTION(sodium_memzero);
-
-#ifdef ZTS
-# define LIBSODIUM_G(v) TSRMG(libsodium_globals_id, zend_libsodium_globals *, v)
-#else
-# define LIBSODIUM_G(v) (libsodium_globals.v)
-#endif
 
 #define crypto_kx_BYTES crypto_scalarmult_BYTES
 #define crypto_kx_PUBLICKEYBYTES crypto_scalarmult_SCALARBYTES
